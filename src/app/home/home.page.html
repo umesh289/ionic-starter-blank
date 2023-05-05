@@ -1,20 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Blank
+      Sample App with Datepicker
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label>Select a date from future</ion-label>
+      <input type="date" [(ngModel)]="selectedDate" name="selectedDate">
+    </ion-item>
+    <ion-button type="submit" expand="block" [disabled]="form.invalid">Submit</ion-button>
+  </form>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngIf="submitted">
+    <h2 style="font-weight: 600">Selected Dates</h2>
+    <ul style="border: 5px solid red; padding: 5px">
+      <li><b>Today:</b> {{ today }}</li>
+      <li><b>Yesterday:</b> {{ yesterday }}</li>
+      <li><b>10 days past selected date:</b> {{ tenDaysPast }}</li>
+      <li><b>1 year past selected date:</b> {{ oneYearPast }}</li>
+    </ul>
   </div>
 </ion-content>
